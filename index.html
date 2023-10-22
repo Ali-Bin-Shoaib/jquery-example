@@ -45,8 +45,14 @@
 					$('.bi-heart-fill').toggleClass('text-danger');
 					if ($('div.container div b').text() == 'like') {
 						$('div.container div b').text('liked');
+						$('.bi-heart-fill~div').text(parseInt($('.bi-heart-fill ~div').text()) + 1);
+						console.log(
+							"🚀 ~ file: index.html:49 ~ $('.bi-heart-fill ~div').val():",
+							$('.bi-heart-fill ~div').val()
+						);
 					} else {
 						$('div.container div b').text('like');
+						$('.bi-heart-fill~div').text(parseInt($('.bi-heart-fill ~div').text()) - 1);
 					}
 					$('div.container').animate(
 						{
@@ -65,7 +71,6 @@
 				});
 				$('#message-input').keypress(function (e) {
 					if (e.originalEvent.key === 'Enter') {
-
 						if ($('#chat-container p:last-of-type').children()[0]?.tagName == 'B') {
 							$('#chat-container p:last-of-type').remove();
 						}
