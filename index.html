@@ -21,6 +21,7 @@
 			crossorigin="anonymous" />
 		<link rel="stylesheet" href="./bootstrap-5.3.2-dist/css/bootstrap.css" />
 		<link rel="stylesheet" href="./bootstrap-icons/font/bootstrap-icons.css" />
+		<link rel="stylesheet" href="style.css" />
 		<script defer>
 			let items = 0;
 			$(document).ready(() => {
@@ -42,10 +43,10 @@
 				});
 				$('.bi-heart-fill').click(function () {
 					$('.bi-heart-fill').toggleClass('text-danger');
-					if ($('div b').text() == 'like') {
-						$('div b').text('liked');
+					if ($('div.container div b').text() == 'like') {
+						$('div.container div b').text('liked');
 					} else {
-						$('div b').text('like');
+						$('div.container div b').text('like');
 					}
 					$('div.container').animate(
 						{
@@ -59,6 +60,17 @@
 						});
 					}, 100);
 				});
+				$('#chat-icon').click(function () {
+					$('i+section').toggleClass('hide');
+				});
+				$('#message-input').keypress(function (e) {
+					if (e.originalEvent.key === 'Enter') {
+						$('#chat-container ').append(`
+										<p class="right-message clear">${$('#message-input').val()}</p>
+
+						`);
+					}
+				});
 			});
 		</script>
 		<style>
@@ -69,6 +81,14 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+			}
+			.chat-radius {
+				border-radius: 5rem 5rem 5rem 0rem;
+			}
+			.hide {
+				width: 0;
+				height: 0;
+				display: none;
 			}
 		</style>
 	</head>
@@ -107,5 +127,32 @@
 				</div>
 			</div>
 		</div>
+		<i id="chat-icon" class="bi-chat position-absolute bottom-0 start-0 fs-1 m-1"></i>
+		<section class="position-absolute bottom-0 start-0 hide">
+			<header>
+				<img src="./1.jpg" alt="user-img" />
+				<div>
+					<h3>tony stark</h3>
+					<p>Today at 12:56</p>
+				</div>
+			</header>
+
+			<div id="chat-container" class="clear">
+				<p class="right-message clear">Hey, man! What's up, Mr Stark?👋</p>
+				<p class="left-message clear">Kid, where'd you come from?</p>
+				<p class="right-message clear">Field trip! 🤣</p>
+				<p class="right-message clear">Uh, what is this guy's problem, Mr. Stark? 🤔</p>
+				<p class="left-message clear">
+					Uh, he's from space, he came here to steal a necklace from a wizard.
+				</p>
+				<p class="left-message clear"><b></b> <b></b> <b></b><b></b></p>
+			</div>
+			<div id="chat-control">
+				<button><i class="fa fa-camera"></i></button>
+				<button><i class="fa-regular fa-face-grin-beam"></i></button>
+				<input type="text" placeholder="Type your message here!" id="message-input" />
+				<button><i class="fa fa-microphone"></i></button>
+			</div>
+		</section>
 	</body>
 </html>
